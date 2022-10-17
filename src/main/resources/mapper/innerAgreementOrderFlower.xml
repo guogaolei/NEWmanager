@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ghl.manage.dao.InnerAgreementOrderFlowerDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.ghl.manage.entity.table.InnerAgreementOrderFlowerEntity" id="InnerAgreementOrderFlowerMap">
+
+        <result column="no" property="no" jdbcType="VARCHAR" />
+        <result column="totalAmount" property="totalAmount" jdbcType="VARCHAR" />
+        <result column="toFinishAmount" property="toFinishAmount" jdbcType="VARCHAR" />
+        <result column="finishAmount" property="finishAmount" jdbcType="VARCHAR" />
+        <result column="nofinishAmount" property="nofinishAmount" jdbcType="VARCHAR" />
+        <result column="leavelAmount" property="leavelAmount" jdbcType="VARCHAR" />
+        <result column="mainNo" property="mainNo" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="addInnerAgreementOrderFlower" parameterType="com.ghl.manage.entity.table.InnerAgreementOrderFlowerEntity">
+      insert into inner_agreement_order_flower values(#{no},#{totalAmount},#{toFinishAmount},
+        #{finishAmount},#{nofinishAmount},#{leavelAmount},#{mainNo})
+    </insert>
+
+    <update id="updateAgreementOrderFlower" parameterType="com.ghl.manage.entity.table.InnerAgreementOrderFlowerEntity">
+        update inner_agreement_order_flower set totalAmount=#{totalAmount},toFinishAmount =#{toFinishAmount}, finishAmount=#{finishAmount},
+        nofinishAmount =#{nofinishAmount}, leavelAmount=#{leavelAmount}, mainNo=#{mainNo} where no=#{no}
+    </update>
+    
+    <select id="getInnerAgreementOrderFlower" resultMap="InnerAgreementOrderFlowerMap">
+        select * from inner_agreement_order_flower where no=#{no}
+    </select>
+    
+    <update id="updateFlowerTotalAmountAndMainNo" parameterType="com.ghl.manage.entity.table.InnerAgreementOrderMasterEntity">
+        update inner_agreement_order_flower set totalAmount=#{totalAmount},mainNo=#{mainNo} where no=#{no}
+    </update>
+    
+    <select id="getFlowerAmountList" resultMap="InnerAgreementOrderFlowerMap">
+        SELECT flower_order.totalAmount,flower_order.toFinishAmount,flower_order.finishAmount,
+        flower_order.nofinishAmount,flower_order.leavelAmount FROM inner_agreement_order_flower flower_order,
+        inner_agreement_info_flower flower_info WHERE flower_order.no=flower_info.no AND flower_info.status!='2'
+    </select>
+    
+    <select id="getInnerAgreementOrderFlowerByMainNo" resultMap="InnerAgreementOrderFlowerMap">
+        select * from inner_agreement_order_flower where mainNo=#{mainNo}
+    </select>
+</mapper>

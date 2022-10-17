@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ghl.manage.dao.InnerAgreementAmountLogDao">
+
+     <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.ghl.manage.entity.table.InnerAgreementAmountLogEntity" id="InnerAgreementAmountLogMap">
+
+        <result column="no" property="no" jdbcType="VARCHAR" />
+        <result column="date" property="date" jdbcType="VARCHAR" />
+        <result column="amount" property="amount" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="note" property="note" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="addInnerAgreementAmountLog" parameterType="com.ghl.manage.entity.table.InnerAgreementAmountLogEntity">
+        insert into inner_agreement_amount_log(no,date,amount,type,note) 
+        values(#{no},#{date},#{amount},#{type},#{note})
+    </insert>
+
+    <select id="getAmountLogs" parameterType="java.lang.String" resultMap="InnerAgreementAmountLogMap">
+        select * from inner_agreement_amount_log
+        where 1=1
+        <if test="no!=null">
+            and no =#{no}
+        </if>
+        <if test="start!=null">
+            and date &gt;= #{start}
+        </if>
+        <if test="end!=null">
+            and date &lt;= #{end}
+        </if>
+    </select>
+    <select id="getAmountLogsByNo" resultType="java.util.Map">
+        SELECT date,amount,type
+		FROM inner_agreement_amount_log WHERE NO=#{no} order by DATE,type asc;
+    </select>
+
+
+</mapper>

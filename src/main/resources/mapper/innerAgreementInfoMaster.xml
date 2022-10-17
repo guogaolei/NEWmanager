@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ghl.manage.dao.InnerAgreementInfoMasterDao">
+
+     <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.ghl.manage.entity.table.InnerAgreementInfoMasterEntity" id="InnerAgreementInfoMasterMap">
+
+        <result column="no" property="no" jdbcType="VARCHAR" />
+        <result column="agreeName" property="agreeName" jdbcType="VARCHAR" />
+        <result column="bussinessName" property="bussinessName" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="level" property="level" jdbcType="VARCHAR" />
+        <result column="person" property="person" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="agreeYear" property="agreeYear" jdbcType="VARCHAR" />
+        <result column="projectNo" property="projectNo" jdbcType="VARCHAR" />
+        <result column="signDate" property="signDate" jdbcType="VARCHAR" />
+        <result column="totalAmount" property="totalAmount" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="addInnerAgreementInfoMaster" parameterType="com.ghl.manage.entity.table.InnerAgreementInfoMasterEntity">
+        insert into inner_agreement_info_master(no,agreeName,bussinessName,type,level,person,status,agreeYear,projectNo,phone,signDate,totalAmount) 
+        values(#{no},#{agreeName},#{bussinessName},#{type},#{level},#{person},#{status},#{agreeYear},#{projectNo},#{phone},#{signDate},#{totalAmount})
+    </insert>
+
+    
+    <select id="getAgreementInfoMaster" resultMap="InnerAgreementInfoMasterMap">
+    select * from inner_agreement_info_master where no=#{no}
+    </select>
+    <update id="updateInnerAgreementInfoMaster" parameterType="com.ghl.manage.entity.table.InnerAgreementInfoMasterEntity">
+    update inner_agreement_info_master set agreeName=#{agreeName},bussinessName=#{bussinessName},type=#{type},level=#{level},person=#{person},status=#{status},
+    agreeYear=#{agreeYear},projectNo=#{projectNo},phone=#{phone},signDate=#{signDate},totalAmount=#{totalAmount} where no=#{no}
+    </update>
+
+    <select id="getCurrentMasterList" parameterType="java.util.Map" resultMap="InnerAgreementInfoMasterMap">
+        SELECT * FROM inner_agreement_info_master WHERE status!='2' and  REPLACE(signdate,'/','') &gt;= #{start} AND REPLACE(signdate,'/','') &lt;= #{end}
+    </select>
+    
+     <select id="queryMasterListByPage"  resultMap="InnerAgreementInfoMasterMap">
+        SELECT * FROM inner_agreement_info_master WHERE status!='2'
+    </select>
+    
+     <select id="queryAllMasterNoAndName"  resultType="java.util.Map">
+        SELECT no,agreeName FROM inner_agreement_info_master WHERE status!='2'
+    </select>
+    <select id="queryMasterListMsg" parameterType="java.util.Map"  resultMap="InnerAgreementInfoMasterMap">
+        SELECT * FROM inner_agreement_info_master WHERE status!='2' 
+        <if test="no!=null and  no!='' ">
+            and no =#{no}
+        </if>
+        <if test="bussinessName!=null and bussinessName!='' ">
+            and bussinessName= #{bussinessName}
+        </if>
+    </select>
+    
+</mapper>
