@@ -66,7 +66,7 @@ public class AgreementController {
 	public CommonResponse getAgreement(String no) {
 		return agreementService.getAgreement(no);
 	}
-	//主营合同查询
+	//所有主营合同编号及名称
 	@RequestMapping(value = "queryAgreement",method = {RequestMethod.GET})
 	@ResponseBody
 	public CommonResponse queryAgreement() {

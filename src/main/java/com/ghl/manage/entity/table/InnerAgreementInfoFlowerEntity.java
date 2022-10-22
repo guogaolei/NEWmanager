@@ -1,7 +1,7 @@
 package com.ghl.manage.entity.table;
 
 public class InnerAgreementInfoFlowerEntity {
-
+	int id;
 	String no;//合同编号
 	String agreeName;//同名称称
 	String bussinessName;//企业名称
@@ -15,6 +15,8 @@ public class InnerAgreementInfoFlowerEntity {
 	String signDate;//签订日期
 	String mainNo;
 	String mainAgreeName;
+
+	String updateTime;
 	public String getMainNo() {
 		return mainNo;
 	}
@@ -30,6 +32,23 @@ public class InnerAgreementInfoFlowerEntity {
 	public String getSignDate() {
 		return signDate;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	public void setSignDate(String signDate) {
 		this.signDate = signDate;
 	}

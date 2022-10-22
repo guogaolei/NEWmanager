@@ -1,11 +1,19 @@
 package com.ghl.manage.service.agreement.impl;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.ghl.manage.dao.InnerAgreementAmountLogDao;
+import com.ghl.manage.dao.InnerAgreementInfoFlowerDao;
+import com.ghl.manage.dao.InnerAgreementInfoMasterDao;
+import com.ghl.manage.dao.InnerAgreementOrderFlowerDao;
+import com.ghl.manage.entity.agreement.*;
+import com.ghl.manage.entity.common.CommonResponse;
+import com.ghl.manage.entity.table.InnerAgreementAmountLogEntity;
+import com.ghl.manage.entity.table.InnerAgreementInfoFlowerEntity;
+import com.ghl.manage.entity.table.InnerAgreementInfoMasterEntity;
+import com.ghl.manage.entity.table.InnerAgreementOrderFlowerEntity;
+import com.ghl.manage.service.agreement.AgreementServiceSide;
+import com.ghl.manage.utils.DateUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -13,25 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import com.ghl.manage.dao.InnerAgreementOrderFlowerDao;
-import com.ghl.manage.dao.InnerAgreementInfoMasterDao;
-import com.ghl.manage.dao.InnerAgreementInfoFlowerDao;
-import com.ghl.manage.dao.InnerAgreementAmountLogDao;
-import com.ghl.manage.entity.agreement.AgreementLogRequestParam;
-import com.ghl.manage.entity.agreement.AgreementSideRequestParam;
-import com.ghl.manage.entity.agreement.FlowerInfoResponseEntity;
-import com.ghl.manage.entity.agreement.FlowerMainPageEntity;
-import com.ghl.manage.entity.agreement.MainFirstRequestParam;
-import com.ghl.manage.entity.agreement.MasterMainPageEntity;
-import com.ghl.manage.entity.common.CommonResponse;
-import com.ghl.manage.entity.table.InnerAgreementAmountLogEntity;
-import com.ghl.manage.entity.table.InnerAgreementInfoFlowerEntity;
-import com.ghl.manage.entity.table.InnerAgreementInfoMasterEntity;
-import com.ghl.manage.entity.table.InnerAgreementOrderFlowerEntity;
-import com.ghl.manage.entity.table.InnerAgreementOrderMasterEntity;
-import com.ghl.manage.service.agreement.AgreementServiceSide;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 @Service
 @Transactional(rollbackFor=Exception.class)
 public class AgreementServiceSideImpl implements AgreementServiceSide{
@@ -52,9 +47,10 @@ public class AgreementServiceSideImpl implements AgreementServiceSide{
 		BeanUtils.copyProperties(request, entity);
 		entity.setFinishAmount("0");entity.setLeavelAmount(entity.getTotalAmount());entity.setNofinishAmount("0");entity.setToFinishAmount("0");
 		InnerAgreementOrderFlowerDao.addInnerAgreementOrderFlower(entity);
-		
+		String time = DateUtils.getTime();
 		InnerAgreementInfoFlowerEntity entity2=new InnerAgreementInfoFlowerEntity();
 		BeanUtils.copyProperties(request, entity2);
+		entity2.setUpdateTime(time);
 		InnerAgreementInfoFlowerDao.addInnerAgreementInfoFlower(entity2);
 		commonResponse.setCode("200");
 		commonResponse.setMsg("success");
@@ -176,6 +172,7 @@ public class AgreementServiceSideImpl implements AgreementServiceSide{
 		CommonResponse commonResponse=new CommonResponse();
 		InnerAgreementInfoFlowerEntity entity=new InnerAgreementInfoFlowerEntity();
 		BeanUtils.copyProperties(request, entity);
+		entity.setUpdateTime(DateUtils.getTime());
 		InnerAgreementInfoFlowerDao.updateInnerAgreementInfoFlower(entity);
 		InnerAgreementOrderFlowerEntity entity2=new InnerAgreementOrderFlowerEntity();
 		BeanUtils.copyProperties(request, entity2);

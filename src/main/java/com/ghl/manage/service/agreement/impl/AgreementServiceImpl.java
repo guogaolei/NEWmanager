@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ghl.manage.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -50,9 +51,11 @@ public class AgreementServiceImpl implements AgreementService{
 		BeanUtils.copyProperties(request, entity);
 		entity.setFinishAmount("0");entity.setInComeAmount("0");entity.setNoComeAmount("0");entity.setNoFinishAmount("0");
 		InnerAgreementOrderMasterDao.addInnerAgreementOrderMaster(entity);
-		
+
+		String time = DateUtils.getTime();
 		InnerAgreementInfoMasterEntity entity2=new InnerAgreementInfoMasterEntity();
 		BeanUtils.copyProperties(request, entity2);
+		entity2.setUpdateTime(time);
 		InnerAgreementInfoMasterDao.addInnerAgreementInfoMaster(entity2);
 		commonResponse.setCode("200");
 		commonResponse.setMsg("success");
@@ -154,6 +157,7 @@ public class AgreementServiceImpl implements AgreementService{
 		CommonResponse commonResponse=new CommonResponse();
 		InnerAgreementInfoMasterEntity entity=new InnerAgreementInfoMasterEntity();
 		BeanUtils.copyProperties(request, entity);
+		entity.setUpdateTime(DateUtils.getTime());
 		InnerAgreementInfoMasterDao.updateInnerAgreementInfoMaster(entity);
 		InnerAgreementOrderMasterEntity entity2=new InnerAgreementOrderMasterEntity();
 		BeanUtils.copyProperties(request, entity2);

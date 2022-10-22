@@ -4,7 +4,7 @@
 
      <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.ghl.manage.entity.table.InnerAgreementInfoFlowerEntity" id="InnerAgreementInfoFlowerMap">
-
+        <result column="id" property="id" jdbcType="INTEGER" />
         <result column="no" property="no" jdbcType="VARCHAR" />
         <result column="agreeName" property="agreeName" jdbcType="VARCHAR" />
         <result column="bussinessName" property="bussinessName" jdbcType="VARCHAR" />
@@ -16,11 +16,12 @@
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="totalAmount" property="totalAmount" jdbcType="VARCHAR" />
         <result column="signDate" property="signDate" jdbcType="VARCHAR" />
+        <result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
     </resultMap>
 
     <insert id="addInnerAgreementInfoFlower" parameterType="com.ghl.manage.entity.table.InnerAgreementInfoFlowerEntity">
-        insert into inner_agreement_info_flower(no,agreeName,bussinessName,type,level,person,status,agreeYear,phone,totalAmount,signDate) 
-        values(#{no},#{agreeName},#{bussinessName},#{type},#{level},#{person},#{status},#{agreeYear},#{phone},#{totalAmount},#{signDate})
+        insert into inner_agreement_info_flower(no,agreeName,bussinessName,type,level,person,status,agreeYear,phone,totalAmount,signDate，updateTime)
+        values(#{no},#{agreeName},#{bussinessName},#{type},#{level},#{person},#{status},#{agreeYear},#{phone},#{totalAmount},#{signDate},#{updateTime})
     </insert>
 
     <select id="getInnerAgreementInfoFlower" resultMap="InnerAgreementInfoFlowerMap">
@@ -29,7 +30,7 @@
 
     <update id="updateInnerAgreementInfoFlower" parameterType="com.ghl.manage.entity.table.InnerAgreementInfoFlowerEntity">
         update inner_agreement_info_flower set agreeName=#{agreeName},bussinessName=#{bussinessName},type=#{type},level=#{level},
-        person=#{person},status=#{status},agreeYear=#{agreeYear},phone=#{phone},totalAmount=#{totalAmount} where no=#{no}
+        person=#{person},status=#{status},agreeYear=#{agreeYear},phone=#{phone},totalAmount=#{totalAmount},updateTime=#{updateTime} where id=#{id}
     </update>
 
     <select id="getCurrentFlowerList" parameterType="java.lang.String" resultMap="InnerAgreementInfoFlowerMap">

@@ -1,7 +1,6 @@
 package com.ghl.manage.entity.table;
 
 public class InnerAgreementOrderFlowerEntity {
-
 	String no;
 	String totalAmount;
 	String toFinishAmount;

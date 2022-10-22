@@ -19,9 +19,16 @@ public class DateUtils {
 		cal.roll(Calendar.DAY_OF_MONTH, -1);
 		return new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()).replace("-", "");
 	}
+
+	public static String  getTime(){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		return new SimpleDateFormat("yyyyMMddHHmmss").format(cal.getTime());
+	}
 	
 	public static void main(String[] args) {
 		System.out.println(getCurrentMonthStartDay());
 		System.out.println(getCurrentMonthEndDay());
+		System.out.println(getTime());
 	}
 }

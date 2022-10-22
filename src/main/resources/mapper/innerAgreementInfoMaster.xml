@@ -4,7 +4,7 @@
 
      <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.ghl.manage.entity.table.InnerAgreementInfoMasterEntity" id="InnerAgreementInfoMasterMap">
-
+        <result column="id" property="id" jdbcType="INTEGER" />
         <result column="no" property="no" jdbcType="VARCHAR" />
         <result column="agreeName" property="agreeName" jdbcType="VARCHAR" />
         <result column="bussinessName" property="bussinessName" jdbcType="VARCHAR" />
@@ -17,11 +17,12 @@
         <result column="projectNo" property="projectNo" jdbcType="VARCHAR" />
         <result column="signDate" property="signDate" jdbcType="VARCHAR" />
         <result column="totalAmount" property="totalAmount" jdbcType="VARCHAR" />
+        <result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
     </resultMap>
 
     <insert id="addInnerAgreementInfoMaster" parameterType="com.ghl.manage.entity.table.InnerAgreementInfoMasterEntity">
-        insert into inner_agreement_info_master(no,agreeName,bussinessName,type,level,person,status,agreeYear,projectNo,phone,signDate,totalAmount) 
-        values(#{no},#{agreeName},#{bussinessName},#{type},#{level},#{person},#{status},#{agreeYear},#{projectNo},#{phone},#{signDate},#{totalAmount})
+        insert into inner_agreement_info_master(no,agreeName,bussinessName,type,level,person,status,agreeYear,projectNo,phone,signDate,totalAmount,updateTime)
+        values(#{no},#{agreeName},#{bussinessName},#{type},#{level},#{person},#{status},#{agreeYear},#{projectNo},#{phone},#{signDate},#{totalAmount},#{updateTime})
     </insert>
 
     
@@ -30,7 +31,7 @@
     </select>
     <update id="updateInnerAgreementInfoMaster" parameterType="com.ghl.manage.entity.table.InnerAgreementInfoMasterEntity">
     update inner_agreement_info_master set agreeName=#{agreeName},bussinessName=#{bussinessName},type=#{type},level=#{level},person=#{person},status=#{status},
-    agreeYear=#{agreeYear},projectNo=#{projectNo},phone=#{phone},signDate=#{signDate},totalAmount=#{totalAmount} where no=#{no}
+    agreeYear=#{agreeYear},projectNo=#{projectNo},phone=#{phone},signDate=#{signDate},totalAmount=#{totalAmount},updateTime=#{updateTime} where id=#{id}
     </update>
 
     <select id="getCurrentMasterList" parameterType="java.util.Map" resultMap="InnerAgreementInfoMasterMap">

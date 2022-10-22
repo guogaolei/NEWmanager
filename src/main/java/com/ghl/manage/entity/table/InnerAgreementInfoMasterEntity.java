@@ -1,7 +1,7 @@
 package com.ghl.manage.entity.table;
 
 public class InnerAgreementInfoMasterEntity {
-
+	int id;
 	String no;//合同编号
 	String agreeName;//同名称称
 	String bussinessName;//企业名称
@@ -14,6 +14,25 @@ public class InnerAgreementInfoMasterEntity {
 	String projectNo;//工程编号
 	String signDate;//签订日期
 	String totalAmount;//合同总金额
+
+	String updateTime;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	public String getNo() {
 		return no;
 	}

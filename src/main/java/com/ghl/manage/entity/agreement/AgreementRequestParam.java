@@ -2,6 +2,7 @@ package com.ghl.manage.entity.agreement;
 
 public class AgreementRequestParam {
 
+	int id;
 	String no;
 	String totalAmount;
 	String finishAmount;
@@ -54,6 +55,15 @@ public class AgreementRequestParam {
 	public void setInComeAmount(String inComeAmount) {
 		this.inComeAmount = inComeAmount;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNoComeAmount() {
 		return noComeAmount;
 	}
